@@ -1,0 +1,213 @@
+﻿@model OnlineShoppingStore.Models.Home.HomeIndexViewModel
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@{
+    ViewBag.Title = "Home page";
+}
+
+<style>
+    /* Ensure full page height and no horizontal scrolling */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Disable horizontal scroll */
+    }
+
+    /* Carousel adjustments to ensure it doesn't overflow */
+    #carouselExampleInterval {
+        max-height: 320px; /* Fix the height to your desired value */
+        overflow: hidden; /* Ensure no content overflows */
+    }
+
+    /* Style for .abc class (Product card) */
+    .abc {
+        height: 300px;
+        width: 150px;
+        border: 2px solid black;
+        margin-bottom: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .caption {
+        line-height: 1.2;
+        font-size: 14px;
+    }
+
+        .caption p {
+            margin: 5px 0;
+        }
+
+    /* Style for the product badge */
+    .product-item-badge {
+        background-color: black;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 12px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    /* Ensuring the product section has a max height and controls overflow */
+    .product-container {
+        max-height: 90vh; /* 90% of the viewport height */
+        overflow-y: auto; /* Allows vertical scrolling if necessary */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: space-between;
+    }
+
+    /* Style for pagination */
+    .pagination {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #FF6347;
+            border-color: #FF6347;
+        }
+
+        .pagination .page-link {
+            color: #FF6347;
+            border: 1px solid #FF6347;
+        }
+
+            .pagination .page-link:hover {
+                background-color: #FF6347;
+                color: white;
+                border-color: #FF6347;
+            }
+
+        .pagination .page-item.disabled .page-link {
+            color: #ccc;
+            border-color: #ccc;
+        }
+
+</style>
+
+<!-- Carousel -->
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="2000">
+            <img style="height:500px;width:100%" src="front1.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Shopping</h5>
+                <p>Get The Best Price Ever</p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img style="height:320px;width:100%" src="~/front2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Discount</h5>
+                <p>Get 50%-60% OFF!</p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img style="height:320px;width:100%" src="~/front4.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>COD</h5>
+                <p>Cash On Delivery Available!</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<br />
+<div> Search Product/Category</div>
+
+<form method="post">
+    <div class="input-group">
+        <input id="email" type="text" class="form-control" name="search" placeholder="Search" value="@Context.Request.Query["search"]" />
+        <span class="input-group-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+        </span>
+    </div>
+</form>
+
+<!-- Products Section -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2> Our Products <small>Trending products</small></h2>
+        </div>
+    </div>
+</div>
+
+<div class="row product-container">
+    @foreach (var item in Model.ListOfProducts)
+    {
+        <div class="abc col-md-3 col-sm-3 col-xs-6 mb-4 mr-md-3">
+            <img src="@item.ProductImage" style="width:100%; height:200px;">
+            <div class="caption">
+                <p>@item.ProductName </p>
+                <p> ₹@item.price</p>
+                <p>
+                    @if (item.Quantity > 0)
+                    {
+                        @:Available
+                        <!-- Form for adding to cart -->
+                        <form method="post" asp-action="AddToCart" asp-route-productId="@item.ProductId">
+                            <button type="submit" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                                </svg> Add to Cart
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        @:Not Available
+                    }
+                </p>
+
+                <div class="product-item-badge">
+                    @if (item.IsFeatured == true)
+                    {
+                        @:New
+                    }
+                    else
+                    {
+                        @:Old
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Pagination -->
+<div class="pagination-container">
+    @Html.PagedListPager(
+            Model.ListOfProducts,
+            page => Url.Action("Index", new { page, search = Context.Request.Query["search"] }),
+            new X.PagedList.Mvc.Core.PagedListRenderOptions()
+    {
+        Display = X.PagedList.Mvc.Core.PagedListDisplayMode.IfNeeded
+    }
+            )
+</div>
