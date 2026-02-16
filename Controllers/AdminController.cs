@@ -45,7 +45,7 @@ namespace OnlineShoppingStore.Controllers
         public ActionResult AddCategory()
         {
             return UpdateCategory(0);  // Add new category
-        }
+        } 
 
         // Edit Category View
         public ActionResult UpdateCategory(int categoryId)
