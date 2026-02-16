@@ -64,7 +64,7 @@ namespace OnlineShoppingStore.Controllers
 
             if (cartItem != null)
             {
-                cartItem.Quantity++;  
+                cartItem.Quantity++;     
             }
             else
             {
