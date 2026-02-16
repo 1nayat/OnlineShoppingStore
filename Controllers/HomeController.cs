@@ -60,7 +60,7 @@ namespace OnlineShoppingStore.Controllers
 
             var cart = HttpContext.Session.GetObjectFromJson<List<Item>>("cart") ?? new List<Item>();
 
-            var cartItem = cart.FirstOrDefault(i => i.Product.ProductId == productId);
+            var cartItem = cart.FirstOrDefault(i => i.Product.ProductId == productId);  
 
             if (cartItem != null)
             {
