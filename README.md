@@ -6,7 +6,7 @@ This project demonstrates core e-commerce workflows using a layered MVC architec
 Overview
 OnlineShoppingStore simulates a complete online retail platform with both user and administrative functionality.
 It includes:
-Product catalog management
+Product catalog management 
 Shopping cart functionality
 Order placement workflow
 Admin management interface  
