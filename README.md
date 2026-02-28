@@ -13,7 +13,7 @@ Admin management interface
 Repository-based data access
 
 Features
-User Features
+User Features  
 Browse product catalog
 View product details
 Add products to cart
