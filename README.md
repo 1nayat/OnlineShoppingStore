@@ -22,7 +22,7 @@ Remove items from cart
 Checkout and place orders
 
 Admin Features
-Add new products
+Add new products  
 Edit existing products
 Delete products
 
