@@ -9,7 +9,7 @@ It includes:
 Product catalog management
 Shopping cart functionality
 Order placement workflow
-Admin management interface
+Admin management interface  
 Repository-based data access
 
 Features
