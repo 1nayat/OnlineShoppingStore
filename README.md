@@ -12,7 +12,7 @@ Order placement workflow
 Admin management interface  
 Repository-based data access
  
-Features
+Features 
 User Features  
 Browse product catalog
 View product details
