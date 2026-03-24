@@ -8,7 +8,7 @@ OnlineShoppingStore simulates a complete online retail platform with both user a
 It includes: 
 Product catalog management 
 Shopping cart functionality
-Order placement workflow
+Order placement workflow 
 Admin management interface  
 Repository-based data access
  
