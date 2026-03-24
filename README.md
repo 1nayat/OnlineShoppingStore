@@ -11,7 +11,7 @@ Shopping cart functionality
 Order placement workflow
 Admin management interface  
 Repository-based data access
-
+ 
 Features
 User Features  
 Browse product catalog
